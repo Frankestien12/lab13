@@ -1,0 +1,45 @@
+package lab12;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class DivisionGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            // Prompt the user for input
+            System.out.print("Enter the dividend (numerator): ");
+            int numerator = scanner.nextInt();
+
+            System.out.print("Enter the divisor (denominator): ");
+            int denominator = scanner.nextInt();
+
+            // Validate input for decimal numbers
+            if (numerator % denominator != 0) {
+                throw new IllegalArgumentException("Invalid input. Please enter integer numbers only.");
+            }
+
+            // Perform division and display the result
+            int result = performDivision(numerator, denominator);
+            System.out.println("Result of division: " + result);
+
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter valid integer numbers.");
+        } catch (ArithmeticException e) {
+            System.out.println("Arithmetic Exception: Division by zero is not allowed.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+
+    // Function to perform division
+    private static int performDivision(int numerator, int denominator) {
+        if (denominator == 0) {
+            throw new ArithmeticException("Division by zero is not allowed.");
+        }
+        return numerator / denominator;
+    }
+}
